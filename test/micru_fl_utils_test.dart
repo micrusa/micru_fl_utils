@@ -1,12 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:micru_fl_utils/functions/loading_state.dart';
 
-import 'package:micru_fl_utils/extensions.dart';
+import 'functions/loading_state.dart';
+import 'numbers/num_extensions.dart';
 
 void main() {
-  test('adds one to input values', () {
-    final calculator = Calculator();
-    expect(calculator.addOne(2), 3);
-    expect(calculator.addOne(-7), -6);
-    expect(calculator.addOne(0), 1);
-  });
+  TestNumExtensions.run();
+  TestLoadingState.run();
 }
