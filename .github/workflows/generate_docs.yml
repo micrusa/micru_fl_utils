@@ -29,7 +29,14 @@ jobs:
         run: flutter pub get
 
       - name: Generate documentation
-        run: dart doc .
+        run: |
+          dart pub global activate dartdoc
+          dart pub global run dartdoc:dartdoc \
+            --exclude 'dart:async,dart:collection,dart:convert,dart:core,dart:developer,dart:math,dart:typed_data,dart:io,dart:isolate' \
+            --no-generate-docs \
+            --warnings-as-errors \
+            --no-validate-links \
+            .
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
