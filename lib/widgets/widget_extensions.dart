@@ -15,4 +15,14 @@ extension WidgetExtensions on Widget {
   Widget centered() {
     return Center(child: this);
   }
+
+  /// Wraps the widget with a [Expanded] widget.
+  Widget expanded({int? flex}) {
+    return Expanded(flex: flex ?? 1, child: this);
+  }
+
+  /// Wraps the widget with a [Flexible] widget.
+  Widget flexible({int flex = 1, FlexFit fit = FlexFit.loose}) {
+    return Flexible(flex: flex, fit: fit, child: this);
+  }
 }
