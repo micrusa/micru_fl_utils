@@ -63,3 +63,16 @@ final sum = list.sum(); // 6
 final avg = list.avg(); // 2
 final max = list.max(); // 3
 ```
+
+### Misc
+- Object?.let(T Function(Object)) => Kotlin-styled let, to handle null values more easily
+```dart
+final String? a = "asd";
+
+final int? length1 = a.let((it) => it.length);
+// Is equivalent to
+int? length2;
+if(a != null) {
+    length2 = a!.length
+}
+```
