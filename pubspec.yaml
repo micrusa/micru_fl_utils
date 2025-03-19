@@ -1,5 +1,5 @@
 name: micru_fl_utils
-description: "A new Flutter package project."
+description: "Flutter utilities and extensions to reduce boilerplate code with commonly used functions."
 version: 0.0.1
 homepage: https://github.com/micrusa/micru_fl_utils
 
