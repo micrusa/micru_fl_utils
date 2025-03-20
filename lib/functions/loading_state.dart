@@ -17,16 +17,18 @@ mixin LoadingStateMixin<T extends StatefulWidget> on State<T> {
 
   /// Returns a function that wraps the given function with loading state.
   /// The loading state is unique to the function instance.
-  Future<K> Function()? withLoading<K>(Future<K> Function() function) {
-    final loadingState = isLoading(function);
+  Future<K> Function()? withLoading<K>(Future<K> Function() function,
+      {int? key}) {
+    key ??= 1;
+    final loadingState = isLoading(key);
     if (loadingState) {
       return null;
     }
 
     return () async {
-      _setStateOf(function.hashCode, true);
+      _setStateOf(key!, true);
       final result = await function();
-      _setStateOf(function.hashCode, false);
+      _setStateOf(key, false);
       return result;
     };
   }
@@ -34,15 +36,16 @@ mixin LoadingStateMixin<T extends StatefulWidget> on State<T> {
   /// Returns a function that wraps the given function with a global loading state.
   /// If any of the loading states are `true`, the function will not be executed.
   /// Useful if you want to prevent multiple functions firing at the same time.
-  Future<K> Function()? withGlobalLoading<K>(Future<K> Function() function) {
+  Future<K> Function()? withGlobalLoading<K>(Future<K> Function() function, {int? key}) {
+    key ??= 1;
     if (isAnyLoading()) {
       return null;
     }
 
     return () async {
-      _setStateOf(function.hashCode, true);
+      _setStateOf(key!, true);
       final result = await function();
-      _setStateOf(function.hashCode, false);
+      _setStateOf(key, false);
       return result;
     };
   }
@@ -53,7 +56,7 @@ mixin LoadingStateMixin<T extends StatefulWidget> on State<T> {
   }
 
   /// Gets the loading state for a specific function
-  bool isLoading(Future<void> Function() function) {
-    return _loadingStates.putIfAbsent(function.hashCode, () => false);
+  bool isLoading(int key) {
+    return _loadingStates.putIfAbsent(key, () => false);
   }
 }
