@@ -28,7 +28,7 @@ class _MyWidgetState extends State<MyWidget> with LoadingStateMixin {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () => withLoading(() async {
+      onPressed: withLoading(() async {
         // The button will get disabled while the function is running
         await Future.delayed(Duration(seconds: 2));
       }),
