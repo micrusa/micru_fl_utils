@@ -1,3 +1,7 @@
+## 1.0.0
+* Rename functions folder to mixins
+* Add mixin for TextEditingControllers
+
 ## 0.0.5
 * Add List extensions
 

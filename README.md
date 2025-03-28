@@ -94,3 +94,51 @@ if(a != null) {
     length2 = a!.length
 }
 ```
+
+## Map Extensions
+- Map.copy() => Returns a new map with the same keys and values
+- Map.addAll(map) => Adds all entries from the given map to this map
+
+```dart
+final map = {'name': 'John', 'age': 30};
+final copiedMap = map.copy(); // Creates a new map: {'name': 'John', 'age': 30}
+copiedMap['age'] = 31; // Original map remains unchanged
+
+final additionalInfo = {'city': 'New York'};
+copiedMap.addAll(additionalInfo); // Now contains {'name': 'John', 'age': 31, 'city': 'New York'}
+```
+
+## TextEditingController Mixin
+- textEditingController(key, {text}) => Get or create a controller for the given key
+- initTextEditingControllers(data) => Initialize controllers from a map
+- Automatically disposes controllers to prevent memory leaks
+
+```dart
+class _MyFormState extends State<MyForm> with TextEditingControllerMixin {
+  @override
+  void initState() {
+    super.initState();
+    // Pre-populate controllers (optional)
+    initTextEditingControllers({'name': 'John', 'email': 'john@example.com'});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        TextField(controller: textEditingController('name')),
+        TextField(controller: textEditingController('email')),
+        // Create a new controller on-the-fly
+        TextField(controller: textEditingController('phone', text: '+1 ')),
+        ElevatedButton(
+          onPressed: () {
+            final name = textEditingController('name').text;
+            print('Hello, $name!');
+          },
+          child: Text('Submit'),
+        ),
+      ],
+    );
+  }
+}
+```
